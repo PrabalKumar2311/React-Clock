@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import InfoButton from "./InfoButton";
 
 function Clock() {
   const [time, setTime] = useState(new Date());
@@ -95,11 +96,12 @@ function Clock() {
       />
 
       {/* Clock */}
-      <div className="backdrop-blur-md px-8 py-3 rounded-3xl -translate-y-5">
+      <div className="backdrop-blur-xs px-8 py-3 rounded-3xl -translate-y-5">
         <h1 className="text-white text-6xl md:text-7xl font-medium text-center tracking-wide leading-none">
           {formatTime()}
         </h1>
       </div>
+      <InfoButton imageUrl={currentBg} />
     </div>
   );
 }
