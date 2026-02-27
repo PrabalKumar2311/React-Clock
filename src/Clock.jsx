@@ -3,79 +3,103 @@ import React, { useEffect, useState } from "react";
 function Clock() {
   const [time, setTime] = useState(new Date());
   const [images, setImages] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Preload images in memory
-  const preloadImage = (url) => {
-    const img = new Image();
-    img.src = url;
-  };
+  const [currentBg, setCurrentBg] = useState("");
+  const [nextBg, setNextBg] = useState("");
+  const [fade, setFade] = useState(false);
 
+  // ⏰ Clock updates every second
   useEffect(() => {
-    // Clock updates every second
-    const timeInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setTime(new Date());
     }, 1000);
 
-    // Fetch images once
-    fetchImages();
-
-    return () => clearInterval(timeInterval);
+    return () => clearInterval(interval);
   }, []);
 
+  // 🌐 Fetch images
   useEffect(() => {
-    if (images.length === 0) return;
-
-    const currentIndex = time.getMinutes() % images.length;
-    setCurrentImageIndex(currentIndex);
-
-    // Preload the next image
-    const nextIndex = (currentIndex + 1) % images.length;
-    preloadImage(images[nextIndex].download_url);
-  }, [time, images]);
-
-  useEffect(() => {
-    if (images.length === 0) return;
-
-    // Apply the current image instantly to body
-    document.body.style.backgroundImage = `url(${images[currentImageIndex].download_url})`;
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center center";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundAttachment = "fixed";
-    document.body.style.margin = "0";
-    document.body.style.height = "100vh";
-
-  }, [currentImageIndex, images]);
-
-  async function fetchImages() {
-    try {
+    async function fetchImages() {
       const API = "https://picsum.photos/v2/list?page=2&limit=100";
       const res = await fetch(API);
       const data = await res.json();
+
       setImages(data);
-    } catch (error) {
-      console.error("Error fetching images:", error);
+
+      if (data.length > 0) {
+  const randomIndex = Math.floor(Math.random() * data.length);
+  setCurrentBg(data[randomIndex].download_url);
+}
     }
-  }
+
+    fetchImages();
+  }, []);
+
+  // 🖼️ Change image every minute
+  useEffect(() => {
+    if (!images.length) return;
+
+    if (time.getSeconds() === 0) {
+      const minute = time.getMinutes();
+      const newImage = images[minute % images.length].download_url;
+
+      const img = new Image();
+      img.src = newImage;
+
+      img.onload = () => {
+        setNextBg(newImage);
+        setFade(true);
+
+        setTimeout(() => {
+          setCurrentBg(newImage);
+          setNextBg("");
+          setFade(false);
+        }, 800);
+      };
+    }
+  }, [time, images]);
 
   function formatTime() {
     let hours = time.getHours();
     let minutes = time.getMinutes();
-    const meridien = hours >= 12 ? "PM" : "AM";
+    let seconds = time.getSeconds();
 
+    const meridien = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
 
-    return `${hours}:${padZero(minutes)} ${meridien}`;
+    const padZero = (n) => (n < 10 ? `0${n}` : n);
 
-    function padZero(number) {
-      return number < 10 ? `0${number}` : number;
-    }
+    return `${hours}:${padZero(minutes)}:${padZero(seconds)} ${meridien}`;
   }
 
   return (
-    <div className="clock-container">
-      <div className="clock">{formatTime()}</div>
+    <div
+      className="fixed inset-0 overflow-hidden flex items-center justify-center"
+      style={{
+        fontFamily:
+          "Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif",
+      }}
+    >
+      {/* Current Background */}
+      <div
+        className="fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+        style={{ backgroundImage: `url(${currentBg})` }}
+      />
+
+      {/* Next Background (fade layer) */}
+      <div
+        className={`fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${
+          fade ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ backgroundImage: `url(${nextBg})` }}
+      />
+
+      {/* Clock */}
+      <div className="backdrop-blur-md px-8 py-3 rounded-3xl -translate-y-5">
+        <h1 className="text-white text-6xl md:text-7xl font-medium text-center tracking-wide leading-none">
+          {formatTime()}
+        </h1>
+      </div>
     </div>
   );
 }

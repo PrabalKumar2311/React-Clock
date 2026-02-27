@@ -1,41 +1,12 @@
-* {
+@import "tailwindcss";
+
+
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-weight: 100;
-
-  background-image: url("https://cdn.sanity.io/images/ubc33cjp/production/83ceac6b313444d8a175c5466888f465b0ef1eed-2560x1298.jpg?auto=format&fit=max&q=75&w=2560");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.5s ease-in-out;
-  opacity: 1;
-  z-index: -1; /* behind content */
-}
-
-.clock-container {
-  backdrop-filter: blur(8px);
-  padding: 10px 30px;
-  border-radius: 2rem;
-}
-
-.clock {
-  font-size: 6rem;
-  color: rgb(255, 255, 255);
-  text-align: center;
-}
-
-@media screen and (max-width: 768px) {
-  .clock{
-    font-size: 4rem;
-  }
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
