@@ -2,15 +2,22 @@
 
 ## Screenshots of the project
 
-<img width="700" height="400" alt="Screenshot 2025-09-23 at 1 26 50 AM" src="https://github.com/user-attachments/assets/970116b0-a3af-40ca-8d7a-1d296bdb7b98" />
-
-<br>
-<br>
-
-<img width="700" height="400" alt="Screenshot 2025-09-23 at 1 41 11 AM" src="https://github.com/user-attachments/assets/d92653a6-0238-4fd1-8cf6-69573a52b158" />
+<img width="1440" height="900" alt="Screenshot 2026-02-27 at 10 50 20 PM" src="https://github.com/user-attachments/assets/93085fc4-f212-4c08-b8cd-4223df93f24c" />
 
 
 <br>
 <br>
 
-Image changes automatically every minute
+## Features
+
+- Real-time clock
+- Background image updates every minute
+- Smooth image crossfade animation
+- Download / preview current background image
+- Minimal glassmorphism UI
+
+## Built With
+
+- React
+- Tailwind CSS
+- Picsum Photos API
