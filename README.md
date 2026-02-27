@@ -4,10 +4,6 @@
 
 <img width="1440" height="900" alt="Screenshot 2026-02-27 at 10 50 20 PM" src="https://github.com/user-attachments/assets/93085fc4-f212-4c08-b8cd-4223df93f24c" />
 
-
-<br>
-<br>
-
 ## Features
 
 - Real-time clock
