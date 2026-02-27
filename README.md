@@ -17,3 +17,7 @@
 - React
 - Tailwind CSS
 - Picsum Photos API
+
+## Future Enhancements
+
+- Add Colorthief
