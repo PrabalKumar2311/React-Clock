@@ -80,7 +80,7 @@ function InfoButton({ imageUrl }) {
             href={imageUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline text-xs"
+            className="underline text-xs"
           >
             Preview background image
           </a>
