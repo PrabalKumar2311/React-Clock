@@ -28,9 +28,9 @@ function Clock() {
       setImages(data);
 
       if (data.length > 0) {
-  const randomIndex = Math.floor(Math.random() * data.length);
-  setCurrentBg(data[randomIndex].download_url);
-}
+        const randomIndex = Math.floor(Math.random() * data.length);
+        setCurrentBg(data[randomIndex].download_url);
+      }
     }
 
     fetchImages();
@@ -96,7 +96,7 @@ function Clock() {
       />
 
       {/* Clock */}
-      <div className="backdrop-blur-xs px-8 py-3 rounded-3xl -translate-y-5">
+      <div className="backdrop-blur-xs px-8 py-3 rounded-3xl ">
         <h1 className="text-white text-6xl md:text-7xl font-medium text-center tracking-wide leading-none">
           {formatTime()}
         </h1>
