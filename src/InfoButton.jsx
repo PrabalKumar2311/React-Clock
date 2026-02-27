@@ -49,7 +49,7 @@ function InfoButton({ imageUrl }) {
           px-4 py-3 rounded-xl text-sm "
         >
           {/* Made by */}
-          <p className="font-medium text-base">Made by Prabal Hayden</p>
+          <p className="font-medium text-base">Made by Prabal Kumar</p>
 
           {/* Social icons */}
           <div className="flex justify-center gap-3 mt-2">
@@ -82,7 +82,7 @@ function InfoButton({ imageUrl }) {
             rel="noopener noreferrer"
             className="underline text-xs"
           >
-            Preview background image
+            Download background image
           </a>
 
           {/* <a
